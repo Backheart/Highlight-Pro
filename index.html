@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="./logo/icon128.svg">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,17 +16,18 @@
 <!-- ============ NAVIGATION ============ -->
 <header class="site-header">
   <nav class="navbar" aria-label="Primary navigation">
-    <a href="#" class="logo" aria-label="Highlight Pro home">
-      <img src="./logo/Highlighter_big logo.svg" alt="Highlight Pro logo highlighter icon" width="24" height="24">
-      </svg>
+    <a href="#about" class="logo" aria-label="Highlight Pro home">
+      <img src="./logo/highlighter-big-logo.svg" alt="Highlight Pro logo" width="24" height="24">
       <span>Highlight Pro</span>
     </a>
     <ul class="nav-links">
       <li><a href="#features">Features</a></li>
       <li><a href="#privacy">Privacy</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#about">About</a></li>
     </ul>
-    <a href="#install" class="btn btn-primary btn-pill" aria-label="Install the Highlight Pro Chrome extension">Install Extension</a>
+    <!-- Swap this href for your live Chrome Web Store listing once published -->
+    <a href="#get-highlight-pro" class="btn btn-primary btn-pill" aria-label="Install the Highlight Pro Chrome extension">Install Extension</a>
   </nav>
 </header>
 
@@ -40,8 +42,8 @@
       <h1>Highlight Pro respects <span class="underline-accent">your privacy.</span></h1>
       <p class="lead">The web highlighter that keeps every word where it belongs — on your device. Mark up any page, tag it in color, export it in a click, and never send a byte to a server we don't have.</p>
       <div class="hero-actions">
-        <a href="#install" class="btn btn-primary btn-lg">Get Started Free</a>
-        <a href="#demo" class="btn btn-outline btn-lg">View Demo</a>
+        <a href="#get-highlight-pro" class="btn btn-primary btn-lg">Get Started Free</a>
+        <a href="#demo" class="btn btn-outline btn-lg" id="viewDemoBtn">View Demo</a>
       </div>
     </div>
 
@@ -172,16 +174,104 @@
       </blockquote>
     </div>
     <div class="companion-graphic" role="img" aria-label="Abstract geometric mark for Highlight Pro">
-        <img src="./logo/Highlighter_big logo.svg" class="companion-logo" alt="highlighter logo" width="400" height="400">
+        <img src="./logo/highlighter-big-logo.svg" class="companion-logo" alt="Highlight Pro geometric logo mark" width="400" height="400">
+    </div>
+  </section>
+
+  <!-- ============ ROADMAP / WHAT'S NEXT ============ -->
+  <section class="roadmap-section">
+    <h2>We're just getting started</h2>
+    <p class="section-sub roadmap-sub">Highlight Pro ships new features every month. Here's what just landed, what we're building right now, and what's next on the list.</p>
+    <div class="roadmap-track">
+      <article class="roadmap-card shipped">
+        <span class="roadmap-tag">Shipped</span>
+        <h3>Smart Scroll Minimap</h3>
+        <p>Colored tags on your scrollbar so every highlight is one click away.</p>
+      </article>
+      <article class="roadmap-card building">
+        <span class="roadmap-tag">In progress</span>
+        <h3>Highlight Folders</h3>
+        <p>Group highlights by project or topic, right inside the panel.</p>
+      </article>
+      <article class="roadmap-card planned">
+        <span class="roadmap-tag">Planned</span>
+        <h3>Mobile Companion</h3>
+        <p>Read your desktop highlights on your phone — still 100% local.</p>
+      </article>
+      <article class="roadmap-card planned">
+        <span class="roadmap-tag">Planned</span>
+        <h3>Custom Themes</h3>
+        <p>Build your own panel color scheme, not just your highlight colors.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <!-- Uses native <details>/<summary> — accessible and keyboard-friendly with zero JS required. -->
+  <section class="faq-section" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <p class="section-sub">Everything you need to know about setting up Highlight Pro, saving your clippings locally, and using the extension completely offline.</p>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>Is this extension really 100% free?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </summary>
+        <p>Yes! It is completely free to install and use. No credit card, no sign-ups, and no hidden subscriptions. We want to get this into the hands of as many people as possible, so please share it if you find it helpful.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Where are my highlights saved?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </summary>
+        <p>All your highlights are saved entirely inside your browser's local storage. This means your data is 100% private, offline, and secure. We do not track, collect, or upload any of your web clippings.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>How do I highlight text on a webpage?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </summary>
+        <p>Once you install the extension, simply select any text on any webpage. A small color selector overlay will appear instantly. Click your favorite highlight color, and the selection is saved.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I right-click to access the highlight menu?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </summary>
+        <p>Yes. Select any text, right-click, and choose "Highlight Pro" from the browser's context menu to pick a color or apply a strikethrough — no need to open the panel at all.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can the page actually auto-scroll to a highlight?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </summary>
+        <p>Yes. Every highlight you create adds a colored tag to the scrollbar — each one labeled with the first few words of that highlight. Click any tag and the page jumps straight to it.</p>
+      </details>
+
+      <!-- PDF support is still in progress — remove this <details> block if it doesn't ship -->
+      <details class="faq-item">
+        <summary>Does it work on PDFs or local files?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </summary>
+        <p>Yes! By enabling "Allow access to file URLs" in your browser's extension settings, you can highlight and save text on local PDF documents and offline files opened in your browser.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Are there any AI or online sync features?
+          <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </summary>
+        <p>Currently, the extension is fully lightweight, simple, and offline-first with zero AI bloat and zero background servers. It's built purely to let you highlight, organize, and search your reading with absolute speed.</p>
+      </details>
     </div>
   </section>
 
   <!-- ============ CTA BANNER ============ -->
-  <section class="cta-banner">
+  <section class="cta-banner" id="get-highlight-pro">
     <h2>Robust free tool at your disposal</h2>
     <p>Join over 50,000+ researchers, students, and writers who trust Highlight Pro for their daily reading. Completely free, completely private.</p>
     <div class="cta-actions">
-      <a href="#install" class="btn btn-primary btn-lg">Try it out</a>
+      <!-- Same action as "Get Started Free" and "Install Extension" above — swap for your Chrome Web Store link -->
+      <a href="#get-highlight-pro" class="btn btn-primary btn-lg">Try it out</a>
+      <!-- Different action from "Try it out" — point this at your Chrome Web Store reviews tab once live -->
       <a href="#reviews" class="btn btn-outline btn-lg btn-star" aria-label="Rate Highlight Pro 5 stars">★ Rate us 5 Stars</a>
     </div>
   </section>

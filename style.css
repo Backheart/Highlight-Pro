@@ -389,6 +389,19 @@ section { padding: 96px 8vw; }
   .browser-body { grid-template-columns: 130px 1fr 10px; min-height: 360px; }
 }
 
+/* "View Demo" pulse — draws the eye to the mockup instead of linking away */
+.browser-frame.pulse {
+  animation: demo-pulse 1.2s ease;
+}
+@keyframes demo-pulse {
+  0%   { box-shadow: var(--shadow-glow); }
+  35%  { box-shadow: 0 0 0 4px rgba(163,194,255,0.35), 0 20px 70px -15px rgba(163,194,255,0.55); }
+  100% { box-shadow: var(--shadow-glow); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .browser-frame.pulse { animation: none; }
+}
+
 /* ==========================================================================
    Privacy section
    ========================================================================== */
@@ -491,10 +504,20 @@ section { padding: 96px 8vw; }
   align-items: center;
 }
 
-.companion-logo{
-  box-shadow: 0 0 80px -30px rgba(236, 236, 236, 0.35);
-  
-  
+.companion-logo {
+  /* drop-shadow follows the logo's actual painted pixels (not a rectangle,
+     unlike box-shadow) so the glow hugs the shape itself */
+  filter:
+    drop-shadow(0 0 28px rgba(224, 32, 62, 0.35))
+    drop-shadow(0 0 56px rgba(246, 196, 0, 0.25));
+  animation: logo-float 6s ease-in-out infinite;
+}
+@keyframes logo-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .companion-logo { animation: none; }
 }
 .companion-copy h2 {
   font-size: clamp(1.8rem, 3.2vw, 2.3rem);
@@ -511,17 +534,126 @@ section { padding: 96px 8vw; }
   color: var(--text-primary);
 }
 .companion-graphic {
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  max-width: 380px;
+  /* no overflow:hidden here — it was clipping the glow before it could show */
+  max-width: 340px;
   margin: 0 auto;
-  aspect-ratio: 1;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.companion-graphic svg { width: 100%; height: 100%; }
+.companion-graphic img { width: 100%; height: auto; }
 
 @media (max-width: 900px) {
   .companion-section { grid-template-columns: 1fr; }
   .companion-graphic { order: -1; max-width: 280px; }
+}
+
+/* ==========================================================================
+   Roadmap / "what's next" section
+   ========================================================================== */
+.roadmap-section {
+  text-align: center;
+}
+.roadmap-section h2 {
+  font-size: clamp(1.8rem, 3.2vw, 2.3rem);
+  margin-bottom: 16px;
+}
+.roadmap-sub { margin-bottom: 40px; }
+
+.roadmap-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  text-align: left;
+}
+
+.roadmap-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  border-top: 3px solid var(--border);
+  transition: transform 0.3s ease;
+}
+.roadmap-card:hover { transform: translateY(-4px); }
+.roadmap-card h3 { font-size: 1rem; margin: 10px 0 8px; }
+.roadmap-card p { font-size: 0.88rem; }
+
+.roadmap-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+}
+.roadmap-card.shipped { border-top-color: #5fc98a; }
+.roadmap-card.shipped .roadmap-tag { background: rgba(95,201,138,0.15); color: #5fc98a; }
+
+.roadmap-card.building { border-top-color: var(--accent-blue); }
+.roadmap-card.building .roadmap-tag { background: rgba(163,194,255,0.15); color: var(--accent-blue); }
+
+.roadmap-card.planned { border-top-color: var(--text-secondary); }
+.roadmap-card.planned .roadmap-tag { background: rgba(161,161,170,0.15); color: var(--text-secondary); }
+
+@media (max-width: 900px) {
+  .roadmap-track { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .roadmap-track { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   FAQ (native details/summary — no JS needed)
+   ========================================================================== */
+.faq-section { text-align: center; }
+.faq-section h2 {
+  font-size: clamp(1.8rem, 3.2vw, 2.3rem);
+  margin-bottom: 16px;
+}
+.faq-list {
+  max-width: 760px;
+  margin: 40px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+.faq-item {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 4px 24px;
+  transition: border-color 0.2s ease;
+}
+.faq-item[open] { border-color: rgba(163,194,255,0.35); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 0;
+  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-chevron {
+  flex-shrink: 0;
+  color: var(--accent-blue);
+  transition: transform 0.25s ease;
+}
+.faq-item[open] .faq-chevron { transform: rotate(180deg); }
+.faq-item p {
+  padding-bottom: 20px;
+  margin: 0;
+  font-size: 0.92rem;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
 }
 
 /* ==========================================================================
