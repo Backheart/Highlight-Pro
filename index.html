@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Highlight Pro — Privacy-first web highlighting</title>
+<meta name="description" content="Highlight Pro is a privacy-first Chrome extension for highlighting, annotating, and exporting the text that matters. No cloud, no accounts, no tracking.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="site-header">
+  <nav class="navbar" aria-label="Primary navigation">
+    <a href="#" class="logo" aria-label="Highlight Pro home">
+      <img src="./logo/Highlighter_big logo.svg" alt="Highlight Pro logo highlighter icon" width="24" height="24">
+      </svg>
+      <span>Highlight Pro</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#privacy">Privacy</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#install" class="btn btn-primary btn-pill" aria-label="Install the Highlight Pro Chrome extension">Install Extension</a>
+  </nav>
+</header>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="about">
+    <div class="hero-copy">
+      <span class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z" stroke="#a3c2ff" stroke-width="1.8"/></svg>
+        PRIVACY-FIRST DESIGN
+      </span>
+      <h1>Highlight Pro respects <span class="underline-accent">your privacy.</span></h1>
+      <p class="lead">The web highlighter that keeps every word where it belongs — on your device. Mark up any page, tag it in color, export it in a click, and never send a byte to a server we don't have.</p>
+      <div class="hero-actions">
+        <a href="#install" class="btn btn-primary btn-lg">Get Started Free</a>
+        <a href="#demo" class="btn btn-outline btn-lg">View Demo</a>
+      </div>
+    </div>
+
+    <!-- Live product demo: replaces a static slideshow with a working mockup of the actual extension -->
+    <div class="hero-visual" id="demo" aria-label="Live preview of the Highlight Pro browser panel">
+      <div class="browser-frame">
+        <div class="browser-chrome">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="browser-url">chrome-extension://highlight-pro</span>
+        </div>
+        <div class="browser-body">
+          <aside class="hl-panel">
+            <div class="hl-panel-head">
+              <span class="hl-panel-title">Highlight Pro</span>
+              <span class="hl-lang">EN ▾</span>
+            </div>
+            <p class="hl-label">Colors</p>
+            <div class="hl-swatch-grid">
+              <button class="swatch" style="--sw:#f5c84c" aria-label="Yellow highlight"></button>
+              <button class="swatch" style="--sw:#7db8ff" aria-label="Blue highlight"></button>
+              <button class="swatch" style="--sw:#ef5f5f" aria-label="Red highlight"></button>
+              <button class="swatch" style="--sw:#5fc98a" aria-label="Green highlight"></button>
+            </div>
+            <p class="hl-label">Custom color</p>
+            <div class="hl-custom-swatch" style="--sw:#e83fce"></div>
+            <button class="hl-strike-btn" id="strikeToggle" type="button">Strikethrough: <span id="strikeState">Off</span></button>
+            <div class="hl-toggles">
+              <div class="hl-toggle-row"><span>Auto-Highlight</span><span class="toggle"></span></div>
+              <div class="hl-toggle-row"><span>Frosted Glass UI</span><span class="toggle on"></span></div>
+              <div class="hl-toggle-row"><span>Keep Panel Open</span><span class="toggle"></span></div>
+              <div class="hl-toggle-row"><span>Show Scroll Tags</span><span class="toggle on"></span></div>
+            </div>
+            <p class="hl-label">Intensity</p>
+            <div class="hl-intensity">
+              <button class="int-btn">Low</button>
+              <button class="int-btn active">Solid</button>
+            </div>
+            <div class="hl-actions">
+              <button class="hl-action-btn primary" id="exportBtn">Export to Clipboard</button>
+              <button class="hl-action-btn">Clear Selected Text</button>
+              <button class="hl-action-btn">Clear All Page</button>
+            </div>
+          </aside>
+
+          <div class="hl-page" id="hlPage">
+            <p><span data-hl>Lorem ipsum dolor sit amet consectetur adipiscing elit.</span> Quisque faucibus ex sapien vitae pellentesque sem placerat. <span data-hl>In id cursus mi pretium tellus duis convallis.</span> Tempus leo eu aenean sed diam urna tempor.</p>
+            <p>Pulvinar vivamus fringilla lacus nec metus bibendum egestas. <span data-hl>Iaculis massa nisl malesuada lacinia integer nunc posuere.</span> Ut hendrerit semper vel class aptent taciti sociosqu. <span data-hl>Ad litora torquent per conubia nostra inceptos himenaeos.</span></p>
+            <p><span data-hl>Sed diam urna tempor pulvinar vivamus fringilla lacus.</span> Nec metus bibendum egestas iaculis massa nisl malesuada lacinia. <span data-hl>Integer nunc posuere ut hendrerit semper vel class.</span></p>
+          </div>
+
+          <div class="hl-minimap" id="hlMinimap" aria-hidden="true"></div>
+        </div>
+      </div>
+      <span class="export-toast" id="exportToast">Copied to clipboard ✓</span>
+    </div>
+  </section>
+
+  <!-- ============ LOCAL STORAGE / PRIVACY ============ -->
+  <section class="privacy-section" id="privacy">
+    <h2>Local Storage, Global Privacy</h2>
+    <p class="section-sub">Unlike extensions that sync your highlights to distant clouds, Highlight Pro saves everything locally with Chrome's native storage API. We don't track your browsing, we don't sell your data, and we don't even run a server to lose it from. Your research stays secured by your machine — full stop.</p>
+    <div class="privacy-features">
+      <div class="privacy-feature">
+        <span class="icon-circle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z" stroke="#a3c2ff" stroke-width="1.8"/></svg>
+        </span>
+        <span>Encryption Ready</span>
+      </div>
+      <div class="privacy-feature">
+        <span class="icon-circle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 8L21 12L17 16M7 8L3 12L7 16M14 4L10 20" stroke="#a3c2ff" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </span>
+        <span>Zero-Cloud Sync</span>
+      </div>
+      <div class="privacy-feature">
+        <span class="icon-circle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" stroke="#a3c2ff" stroke-width="1.8"/><path d="M3 9h18" stroke="#a3c2ff" stroke-width="1.8"/></svg>
+        </span>
+        <span>Native Chrome API</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES GRID ============ -->
+  <section class="features-section" id="features">
+    <h2>A tool for everyday use</h2>
+    <div class="features-grid">
+      <article class="feature-card">
+        <span class="feature-icon">🎨</span>
+        <h3>Multiple Colors &amp; Custom Picker</h3>
+        <p>Four curated shades, or open the picker and dial in the exact hex you need.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">🗺️</span>
+        <h3>Smart Scroll Minimap</h3>
+        <p>Every highlight gets a colored tag on the scrollbar, so you can jump straight back to it.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">❌</span>
+        <h3>Hover Deletion</h3>
+        <p>Hover any highlight and a sleek "×" appears — one click and it's gone.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">📋</span>
+        <h3>1-Click Export</h3>
+        <p>Copy every highlighted thought to your clipboard, perfectly formatted and ready to paste.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">🌍</span>
+        <h3>24+ Languages</h3>
+        <p>Switch the panel to Spanish, French, Swahili, Luganda, and 20 more, instantly.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">🔒</span>
+        <h3>100% Private</h3>
+        <p>No backend, no accounts, no data tracking. Your highlights live on your device — only.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ SMART COMPANION ============ -->
+  <section class="companion-section">
+    <div class="companion-copy">
+      <h2>Your Smart Research Companion</h2>
+      <p>Highlight Pro follows your reading, not the other way around. Select, tag, and revisit passages across any site, with a panel that stays out of your way until you need it.</p>
+      <blockquote class="quote-box">
+        <span aria-hidden="true">💡</span> Did you know? You can export your highlights directly to your clipboard in Markdown format.
+      </blockquote>
+    </div>
+    <div class="companion-graphic" role="img" aria-label="Abstract geometric mark for Highlight Pro">
+        <img src="./logo/Highlighter_big logo.svg" class="companion-logo" alt="highlighter logo" width="400" height="400">
+    </div>
+  </section>
+
+  <!-- ============ CTA BANNER ============ -->
+  <section class="cta-banner">
+    <h2>Robust free tool at your disposal</h2>
+    <p>Join over 50,000+ researchers, students, and writers who trust Highlight Pro for their daily reading. Completely free, completely private.</p>
+    <div class="cta-actions">
+      <a href="#install" class="btn btn-primary btn-lg">Try it out</a>
+      <a href="#reviews" class="btn btn-outline btn-lg btn-star" aria-label="Rate Highlight Pro 5 stars">★ Rate us 5 Stars</a>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact-section">
+    <div class="contact-copy">
+      <h2>Get in touch</h2>
+      <p>Have questions or suggestions? We love hearing from our users. Whether it's a bug report or a feature request, drop us a message and we'll get back to you within 24 hours.</p>
+      <a class="contact-line" href="mailto:support@highlightpro.io">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2" stroke="#a3c2ff" stroke-width="1.8"/><path d="M3 6l9 7 9-7" stroke="#a3c2ff" stroke-width="1.8"/></svg>
+        support@highlightpro.io
+      </a>
+      <span class="contact-line">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z" stroke="#a3c2ff" stroke-width="1.8"/><circle cx="12" cy="9" r="2.4" stroke="#a3c2ff" stroke-width="1.8"/></svg>
+        Distributed Team · Privacy Global
+      </span>
+    </div>
+    <form class="contact-form" id="contactForm" novalidate>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="John Doe" autocomplete="name" required>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="john@company.com" autocomplete="email" required>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="4" placeholder="How can we help?" required></textarea>
+      <button type="submit" class="btn btn-primary" id="submitBtn">Submit Message</button>
+      <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <span>© 2026 Highlight Pro. Privacy first, always.</span>
+  <ul class="footer-links">
+    <li><a href="#">Privacy Policy</a></li>
+    <li><a href="#">Terms of Service</a></li>
+    <li><a href="#">Contact Us</a></li>
+    <li><a href="#" aria-label="Highlight Pro on Twitter">Twitter</a></li>
+    <li><a href="#" aria-label="Highlight Pro on GitHub">GitHub</a></li>
+  </ul>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
