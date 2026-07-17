@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initStrikeToggle();
   initContactForm();
   initViewDemoPulse();
+  initFaqAccordion();
+  initMobileNav();
 });
 
 /**
@@ -130,6 +132,64 @@ function initViewDemoPulse() {
     frame.scrollIntoView({ behavior: 'smooth', block: 'center' });
     frame.classList.add('pulse');
     setTimeout(() => frame.classList.remove('pulse'), 1200);
+  });
+}
+
+/**
+ * initMobileNav
+ * The hamburger button (only visible at the 768px breakpoint) toggles the
+ * nav links open as a dropdown panel. Closes on link click, on clicking
+ * outside it, and on Escape — the standard set of "don't trap the user"
+ * behaviors for a mobile menu.
+ */
+function initMobileNav() {
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if (!toggle || !links) return;
+
+  function closeMenu() {
+    links.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  toggle.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  links.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!links.contains(e.target) && !toggle.contains(e.target)) closeMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+}
+
+/**
+ * initFaqAccordion
+ * The <details name="faq-group"> attribute already makes these mutually
+ * exclusive natively in current Chrome — opening one auto-closes the rest,
+ * with zero JS. This listener is just a backstop for browsers that don't
+ * support that attribute yet (e.g. older Firefox/Safari), so the same
+ * one-at-a-time behavior holds everywhere.
+ */
+function initFaqAccordion() {
+  const items = document.querySelectorAll('.faq-item');
+  items.forEach((item) => {
+    item.addEventListener('toggle', () => {
+      if (item.open) {
+        items.forEach((other) => {
+          if (other !== item) other.open = false;
+        });
+      }
+    });
   });
 }
 

@@ -17,10 +17,15 @@
 <header class="site-header">
   <nav class="navbar" aria-label="Primary navigation">
     <a href="#about" class="logo" aria-label="Highlight Pro home">
-      <img src="./logo/Highlighter_big logo.svg" alt="Highlight Pro logo" width="24" height="24">
-      <span>Highlight Pro</span>
+      <img src="./logo/icon128.svg" alt="Highlight Pro logo" width="24" height="24">
+      <span translate="no">Highlight Pro</span>
     </a>
-    <ul class="nav-links">
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#features">Features</a></li>
       <li><a href="#privacy">Privacy</a></li>
       <li><a href="#faq">FAQ</a></li>
@@ -39,7 +44,7 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z" stroke="#a3c2ff" stroke-width="1.8"/></svg>
         PRIVACY-FIRST DESIGN
       </span>
-      <h1>Highlight Pro respects <span class="underline-accent">your privacy.</span></h1>
+      <h1><span translate="no">Highlight Pro</span> respects <span class="underline-accent">your privacy.</span></h1>
       <p class="lead">The web highlighter that keeps every word where it belongs — on your device. Mark up any page, tag it in color, export it in a click, and never send a byte to a server we don't have.</p>
       <div class="hero-actions">
         <a href="#get-highlight-pro" class="btn btn-primary btn-lg">Get Started Free</a>
@@ -57,7 +62,7 @@
         <div class="browser-body">
           <aside class="hl-panel">
             <div class="hl-panel-head">
-              <span class="hl-panel-title">Highlight Pro</span>
+              <span class="hl-panel-title" translate="no">Highlight Pro</span>
               <span class="hl-lang">EN ▾</span>
             </div>
             <p class="hl-label">Colors</p>
@@ -104,7 +109,7 @@
   <!-- ============ LOCAL STORAGE / PRIVACY ============ -->
   <section class="privacy-section" id="privacy">
     <h2>Local Storage, Global Privacy</h2>
-    <p class="section-sub">Unlike extensions that sync your highlights to distant clouds, Highlight Pro saves everything locally with Chrome's native storage API. We don't track your browsing, we don't sell your data, and we don't even run a server to lose it from. Your research stays secured by your machine — full stop.</p>
+    <p class="section-sub">Unlike extensions that sync your highlights to distant clouds,  <span translate="no">Highlight Pro</span> saves everything locally with Chrome's native storage API. We don't track your browsing, we don't sell your data, and we don't even run a server to lose it from. Your research stays secured by your machine — full stop.</p>
     <div class="privacy-features">
       <div class="privacy-feature">
         <span class="icon-circle">
@@ -168,20 +173,26 @@
   <section class="companion-section">
     <div class="companion-copy">
       <h2>Your Smart Research Companion</h2>
-      <p>Highlight Pro follows your reading, not the other way around. Select, tag, and revisit passages across any site, with a panel that stays out of your way until you need it.</p>
+      <p><span translate="no">Highlight Pro</span> follows your reading, not the other way around. Select, tag, and revisit passages across any site, with a panel that stays out of your way until you need it.</p>
       <blockquote class="quote-box">
-        <span aria-hidden="true">💡</span> Did you know? You can export your highlights directly to your clipboard in Markdown format.
+        <span aria-hidden="true">💡</span> Did you know? You can export all your highlights directly to your clipboard as perfectly formatted, clean text ready for your notes.
       </blockquote>
     </div>
     <div class="companion-graphic" role="img" aria-label="Abstract geometric mark for Highlight Pro">
-        <img src="./logo/Highlighter_big logo.svg" class="companion-logo" alt="Highlight Pro geometric logo mark" width="400" height="400">
+      <!--
+        Inlined (not an <img>) so the eye can actually be animated: the two
+        eyelid rectangles below sit on top of the eye, colored to match the
+        red/pink halves they're covering, and slide apart once when this
+        section first scrolls into view. See initEyeReveal() in script.js.
+      -->
+      <img src="./logo/Highlighter_big logo.svg" alt="Highlight Pro logo" class="companion-logo" width="200" height="200">
     </div>
   </section>
 
   <!-- ============ ROADMAP / WHAT'S NEXT ============ -->
   <section class="roadmap-section">
     <h2>We're just getting started</h2>
-    <p class="section-sub roadmap-sub">Highlight Pro ships new features every month. Here's what just landed, what we're building right now, and what's next on the list.</p>
+    <p class="section-sub roadmap-sub"> <span translate="no">Highlight Pro</span> ships new features every month. Here's what just landed, what we're building right now, and what's next on the list.</p>
     <div class="roadmap-track">
       <article class="roadmap-card shipped">
         <span class="roadmap-tag">Shipped</span>
@@ -190,18 +201,18 @@
       </article>
       <article class="roadmap-card building">
         <span class="roadmap-tag">In progress</span>
-        <h3>Highlight Folders</h3>
-        <p>Group highlights by project or topic, right inside the panel.</p>
+        <h3>"Hand Drawn Scribbles"</h3>
+        <p>Draw freeform highlights on text over any webpage.</p>
       </article>
       <article class="roadmap-card planned">
         <span class="roadmap-tag">Planned</span>
-        <h3>Mobile Companion</h3>
-        <p>Read your desktop highlights on your phone — still 100% local.</p>
+        <h3>AI Features</h3>
+        <p>Intelligent suggestions and automated organization for your highlights.</p>
       </article>
       <article class="roadmap-card planned">
         <span class="roadmap-tag">Planned</span>
-        <h3>Custom Themes</h3>
-        <p>Build your own panel color scheme, not just your highlight colors.</p>
+        <h3>1-Click Sentence Highlight</h3>
+        <p>Simply click anywhere on a sentence to instantly highlight the entire block of text.</p>
       </article>
     </div>
   </section>
@@ -210,7 +221,7 @@
   <!-- Uses native <details>/<summary> — accessible and keyboard-friendly with zero JS required. -->
   <section class="faq-section" id="faq">
     <h2>Frequently Asked Questions</h2>
-    <p class="section-sub">Everything you need to know about setting up Highlight Pro, saving your clippings locally, and using the extension completely offline.</p>
+    <p class="section-sub">Everything you need to know about setting up  <span translate="no">Highlight Pro</span>, saving your clippings locally, and using the extension completely offline.</p>
     <div class="faq-list">
       <details class="faq-item" open>
         <summary>Is this extension really 100% free?
@@ -230,14 +241,17 @@
         <summary>How do I highlight text on a webpage?
           <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </summary>
-        <p>Once you install the extension, simply select any text on any webpage. A small color selector overlay will appear instantly. Click your favorite highlight color, and the selection is saved.</p>
+        <p><span translate="no">Highlight Pro</span> gives you three seamless ways to work: <br><br>
+        1. <b>Auto-Highlight:</b> Turn this on in the sidebar, and any text you select is instantly highlighted.<br>
+        2. <b>Right-Click:</b> Select text, right-click, and choose your color from the menu.<br>
+        3. <b>The Sidebar:</b> Keep the frosted-glass panel open and click your desired color button after selecting text.</p>
       </details>
 
       <details class="faq-item">
         <summary>Can I right-click to access the highlight menu?
           <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </summary>
-        <p>Yes. Select any text, right-click, and choose "Highlight Pro" from the browser's context menu to pick a color or apply a strikethrough — no need to open the panel at all.</p>
+        <p>Yes. Select any text, right-click, and choose " <span translate="no">Highlight Pro</span>" from the browser's context menu to pick a color or apply a strikethrough — no need to open the panel at all.</p>
       </details>
 
       <details class="faq-item">
@@ -252,7 +266,8 @@
         <summary>Does it work on PDFs or local files?
           <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </summary>
-        <p>Yes! By enabling "Allow access to file URLs" in your browser's extension settings, you can highlight and save text on local PDF documents and offline files opened in your browser.</p>
+        <p>You can highlight local HTML and Text files saved on your computer by enabling "Allow access to file URLs" in your Chrome Extension settings! <br>
+        Note on PDFs: <span translate="no">Highlight Pro</span> is currently hyper-optimized for web articles, blogs, and AI tools (like Gemini and ChatGPT). Native PDF support requires a custom viewer and is actively in development.</p>
       </details>
 
       <details class="faq-item">
@@ -266,8 +281,8 @@
 
   <!-- ============ CTA BANNER ============ -->
   <section class="cta-banner" id="get-highlight-pro">
-    <h2>Robust free tool at your disposal</h2>
-    <p>Join over 50,000+ researchers, students, and writers who trust Highlight Pro for their daily reading. Completely free, completely private.</p>
+     <h2>Robust free tool at your disposal</h2>
+    <p>Join the growing community of researchers, students, and writers who trust <span translate="no">Highlight Pro</span> for their daily reading. Completely free, completely private.</p>
     <div class="cta-actions">
       <!-- Same action as "Get Started Free" and "Install Extension" above — swap for your Chrome Web Store link -->
       <a href="#get-highlight-pro" class="btn btn-primary btn-lg">Try it out</a>
@@ -305,7 +320,7 @@
 
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
-  <span>© 2026 Highlight Pro. Privacy first, always.</span>
+  <span>© 2026 <span translate="no">Highlight Pro</span>. Privacy first, always.</span>
   <ul class="footer-links">
     <li><a href="#">Privacy Policy</a></li>
     <li><a href="#">Terms of Service</a></li>

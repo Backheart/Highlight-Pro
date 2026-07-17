@@ -129,6 +129,7 @@ section { padding: 96px 8vw; }
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  position: relative; /* anchors the mobile dropdown below */
 }
 
 .logo {
@@ -139,6 +140,31 @@ section { padding: 96px 8vw; }
   font-weight: 700;
   font-size: 1.15rem;
 }
+
+/* Hamburger toggle — hidden on desktop, shown only at the mobile breakpoint below */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.nav-toggle-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-toggle.open .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open .nav-toggle-bar:nth-child(2) { opacity: 0; }
+.nav-toggle.open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .nav-links {
   list-style: none;
@@ -156,7 +182,30 @@ section { padding: 96px 8vw; }
 .nav-links a:hover { color: var(--text-primary); }
 
 @media (max-width: 768px) {
-  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+
+  /* The links become a dropdown panel instead of just vanishing */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 32px -12px rgba(0,0,0,0.5);
+    padding: 8px 8vw 12px;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links li:last-child a { border-bottom: none; }
 }
 
 /* ==========================================================================
@@ -292,10 +341,16 @@ section { padding: 96px 8vw; }
 .hl-strike-btn:hover { filter: brightness(1.08); }
 
 .hl-toggles { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
-.hl-toggle-row { display: flex; justify-content: space-between; align-items: center; }
+.hl-toggle-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.hl-toggle-row > span:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
 .toggle {
   width: 30px; height: 16px; border-radius: var(--r-pill);
   background: #34343a; position: relative; display: inline-block;
+  flex-shrink: 0;
 }
 .toggle::after {
   content: ''; position: absolute; top: 2px; left: 2px;
@@ -386,7 +441,7 @@ section { padding: 96px 8vw; }
 
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; padding-top: 40px; }
-  .browser-body { grid-template-columns: 130px 1fr 10px; min-height: 360px; }
+  .browser-body { grid-template-columns: 142px 1fr 10px; min-height: 360px; }
 }
 
 /* "View Demo" pulse — draws the eye to the mockup instead of linking away */
