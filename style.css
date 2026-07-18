@@ -838,7 +838,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
    ========================================================================== */
 .tag-demo-section {
   display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
+  grid-template-columns: minmax(240px, 380px) 1fr;
   gap: 48px;
   align-items: center;
 }
@@ -853,24 +853,34 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 20px 28px 20px 20px;
+  padding: 24px 32px 24px 24px;
   display: flex;
-  gap: 16px;
-  max-width: 280px;
+  gap: 20px;
+  width: 100%;
+  max-width: 700px;
   margin-left: auto;
 }
 .tag-demo-page {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-top: 4px;
+  min-width: 0;
+  background: #2b2b30; /* muted grey backdrop, distinct from the panel behind it */
+  border-radius: var(--r-sm);
+  padding: 20px 22px;
+  overflow: hidden;
 }
-.tdp-line {
-  display: block;
-  height: 6px;
+.tag-demo-page p {
+  margin: 0;
+  color: #d4d4d8;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  filter: blur(2.4px);
+  user-select: none;
+}
+.tdp-highlight {
+  background: var(--hl);
+  color: #14141a;
   border-radius: 3px;
-  background: var(--bg-elevated-2);
+  padding: 0 2px;
 }
 .tag-demo-bar {
   width: 8px;
@@ -881,6 +891,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  flex-shrink: 0;
 }
 .tag-demo-tag {
   width: 8px;
