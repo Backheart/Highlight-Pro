@@ -16,7 +16,7 @@
 <!-- ============ NAVIGATION ============ -->
 <header class="site-header">
   <nav class="navbar" aria-label="Primary navigation">
-    <a href="#about" class="logo" aria-label="Highlight Pro home">
+    <a href="#home" class="logo" aria-label="Highlight Pro home">
       <img src="./logo/icon128.svg" alt="Highlight Pro logo" width="24" height="24">
       <span translate="no">Highlight Pro</span>
     </a>
@@ -30,6 +30,7 @@
       <li><a href="#privacy">Privacy</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact Us</a></li>
     </ul>
     <!-- Swap this href for your live Chrome Web Store listing once published -->
     <a href="#get-highlight-pro" class="btn btn-primary btn-pill" aria-label="Install the Highlight Pro Chrome extension">Install Extension</a>
@@ -38,7 +39,7 @@
 
 <main>
   <!-- ============ HERO ============ -->
-  <section class="hero" id="about">
+  <section class="hero" id="home">
     <div class="hero-copy">
       <span class="badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z" stroke="#a3c2ff" stroke-width="1.8"/></svg>
@@ -169,6 +170,33 @@
     </div>
   </section>
 
+  <!-- ============ SCROLL TAG MINI-DEMO ============ -->
+  <section class="tag-demo-section">
+    <div class="tag-demo-copy">
+      <h2>Never lose your place</h2>
+      <p>Every highlight drops a colored tag on the scrollbar. Hover one — or in this demo, just watch — and it shows you exactly what you tagged, without scrolling back to find it.</p>
+    </div>
+    <div class="tag-demo-widget" aria-hidden="true">
+      <div class="tag-demo-page">
+        <span class="tdp-line" style="width:88%"></span>
+        <span class="tdp-line" style="width:64%"></span>
+        <span class="tdp-line" style="width:92%"></span>
+        <span class="tdp-line" style="width:40%"></span>
+        <span class="tdp-line" style="width:80%"></span>
+        <span class="tdp-line" style="width:70%"></span>
+        <span class="tdp-line" style="width:90%"></span>
+        <span class="tdp-line" style="width:50%"></span>
+      </div>
+      <div class="tag-demo-bar" id="tagDemoBar">
+        <span class="tag-demo-tag" style="--tag-color:#f5c84c" data-label="Lorem ipsum dolor..."></span>
+        <span class="tag-demo-tag" style="--tag-color:#7db8ff" data-label="In id cursus mi..."></span>
+        <span class="tag-demo-tag" style="--tag-color:#ef5f5f" data-label="Ad litora torquent..."></span>
+        <span class="tag-demo-tag" style="--tag-color:#5fc98a" data-label="Integer nunc posuere..."></span>
+      </div>
+      <span class="tag-demo-tooltip" id="tagDemoTooltip"></span>
+    </div>
+  </section>
+
   <!-- ============ SMART COMPANION ============ -->
   <section class="companion-section">
     <div class="companion-copy">
@@ -291,8 +319,16 @@
     </div>
   </section>
 
+  <!-- ============ ABOUT US ============ -->
+  <section class="about-section" id="about">
+    <h2>Built for the heavy readers.</h2>
+    <p>We are a small team of innovators building solutions for the problems we face every day — like surviving hours of heavy reading.</p>
+    <p>We believe that good software should feel like a relief. Everything in our extension is strictly functional, and we have beautiful updates on the way designed to make your workflow faster and much more pleasant to look at.</p>
+    <p>For us, innovation isn't just about a shiny bar of gold or a beautiful curved design; it has to be deeply useful, reliable, and exactly what you need.</p>
+  </section>
+
   <!-- ============ CONTACT ============ -->
-  <section class="contact-section">
+  <section class="contact-section" id="contact">
     <div class="contact-copy">
       <h2>Get in touch</h2>
       <p>Have questions or suggestions? We love hearing from our users. Whether it's a bug report or a feature request, drop us a message and we'll get back to you within 24 hours.</p>
@@ -322,13 +358,40 @@
 <footer class="site-footer">
   <span>© 2026 <span translate="no">Highlight Pro</span>. Privacy first, always.</span>
   <ul class="footer-links">
-    <li><a href="#">Privacy Policy</a></li>
-    <li><a href="#">Terms of Service</a></li>
-    <li><a href="#">Contact Us</a></li>
+    <li><a href="#privacy">Privacy Policy</a></li>
+    <li><a href="#" id="openTosBtn">Terms of Service</a></li>
     <li><a href="#" aria-label="Highlight Pro on Twitter">Twitter</a></li>
     <li><a href="#" aria-label="Highlight Pro on GitHub">GitHub</a></li>
   </ul>
 </footer>
+
+<!-- ============ TERMS OF SERVICE MODAL ============ -->
+<div id="tosModal" class="tos-modal-overlay" aria-hidden="true">
+  <div class="tos-modal-card">
+    <div class="tos-modal-header">
+      <h3>Terms of Service</h3>
+      <button id="closeTosBtn" class="close-btn" aria-label="Close modal">&times;</button>
+    </div>
+    <div class="tos-modal-content">
+      <p><strong>1. Acceptance of Terms</strong><br>
+      By downloading and using the Highlight Pro browser extension, you agree to these Terms of Service.</p>
+      
+      <p><strong>2. Privacy and Data Storage</strong><br>
+      Highlight Pro is a privacy-first application. We do not require an account, and we do not host a server to collect, store, or sell your data. All highlighted text, colors, and settings are saved locally on your device. You are solely responsible for the data you highlight and save.</p>
+      
+      <p><strong>3. Provided "As Is"</strong><br>
+      Highlight Pro is provided on an "AS IS" basis. While we strive to build a perfect tool, we do not guarantee that the extension will be bug-free or operate without interruption. We are not responsible for any lost highlights or data loss. Please back up your important notes using our Export feature.</p>
+      
+      <p><strong>4. Acceptable Use</strong><br>
+      You agree not to use the extension for any illegal or unauthorized purpose. You may not reverse-engineer or attempt to extract the source code of the extension for commercial resale without permission.</p>
+      
+      <p><strong>5. Changes to Terms</strong><br>
+      We reserve the right to update these terms. When we introduce premium features in the future, these terms will be updated accordingly.</p>
+      
+      <p><em>Contact Us: support@highlightpro.io</em></p>
+    </div>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>

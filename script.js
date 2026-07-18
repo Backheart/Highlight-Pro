@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initViewDemoPulse();
   initFaqAccordion();
   initMobileNav();
+  initTosModal();
+  initTagDemo();
 });
 
 /**
@@ -273,5 +275,94 @@ function initContactForm() {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit Message';
     }
+  });
+}
+
+
+/**
+ * initTagDemo
+ * A compact, self-contained loop showing what the real scroll minimap does:
+ * each colored tag lights up in turn and a tooltip with its label slides in
+ * next to it, then fades before the next one takes over. Unlike the eye
+ * effect, this is meant to run continuously as ambient illustration, not
+ * as a one-time reveal.
+ */
+function initTagDemo() {
+  const tags = Array.from(document.querySelectorAll('#tagDemoBar .tag-demo-tag'));
+  const tooltip = document.getElementById('tagDemoTooltip');
+  if (!tags.length || !tooltip) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let index = 0;
+
+  function showTag(i) {
+    tags.forEach((t) => t.classList.remove('active'));
+    const tag = tags[i];
+    tag.classList.add('active');
+
+    tooltip.textContent = tag.dataset.label;
+    tooltip.style.top = `${tag.offsetTop + tag.offsetHeight / 2 - tooltip.offsetHeight / 2}px`;
+    tooltip.classList.add('show');
+  }
+
+  function hideTooltip() {
+    tooltip.classList.remove('show');
+  }
+
+  function loop() {
+    showTag(index);
+    setTimeout(() => {
+      hideTooltip();
+      index = (index + 1) % tags.length;
+      setTimeout(loop, prefersReducedMotion ? 0 : 400);
+    }, 1800);
+  }
+
+  if (prefersReducedMotion) {
+    // Just show the first tag as a static illustration, no cycling.
+    showTag(0);
+    return;
+  }
+
+  loop();
+}
+
+/**
+ * initTosModal
+ * Opens the Terms of Service as a frosted-glass overlay instead of
+ * navigating away. Closes on the × button, a click on the dark backdrop,
+ * or Escape — and locks background scroll while it's open so the page
+ * underneath doesn't scroll along with it.
+ */
+function initTosModal() {
+  const openBtn = document.getElementById('openTosBtn');
+  const closeBtn = document.getElementById('closeTosBtn');
+  const modal = document.getElementById('tosModal');
+  if (!openBtn || !closeBtn || !modal) return;
+
+  function openModal(e) {
+    e.preventDefault();
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+
+  // Click on the dark backdrop (not the card itself) closes it too.
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
   });
 }
